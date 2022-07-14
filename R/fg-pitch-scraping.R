@@ -48,17 +48,17 @@ url %>%
 # Scraping fangraphs table body
 
 fg_data <- (url %>%
-  html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/tbody') %>%
-  html_table())[[1]]
+              html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/tbody') %>%
+              html_table())[[1]]
 
 
 # Trying to scrape column names
 
 fg_colnames <-
-((url %>%
-  html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/thead') %>%
-  html_table())[[1]] %>%
-  slice(2))[1,]
+  ((url %>%
+      html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/thead') %>%
+      html_table())[[1]] %>%
+     slice(2))[1,]
 
 # Trying to combine
 colnames(fg_data) <- str_trim(fg_colnames)
@@ -71,27 +71,27 @@ start_date <- "2022-05-28"
 end_date <- Sys.Date()
 npage = 1
 qual = 30
-  
-  
-  
+
+
+
 test_func <- function(start_date = "2022-01-01", end_date = "2022-12-31", npage = 1, qual = "y"){
   
   # Grab fg URL
   url <- paste0("https://www.fangraphs.com/leaders.aspx?pos=all&stats=pit&lg=all&qual=",
                 qual,
                 "&type=1&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
-         start_date, 
-         "&enddate=",
-         end_date,
-         "&sort=9,d&page=1_100000")
+                start_date, 
+                "&enddate=",
+                end_date,
+                "&sort=9,d&page=1_100000")
   
   wp <- read_html(url)
   
   # Grab data from webpage, convert to table
   fg_data <- 
     (wp %>%
-      html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/tbody') %>%
-      html_table())[[1]]
+       html_nodes(xpath = '//*[@id="LeaderBoard1_dg1_ctl00"]/tbody') %>%
+       html_table())[[1]]
   
   # Grab and assign appropriate column names
   fg_colnames <-
@@ -110,7 +110,7 @@ test_func <- function(start_date = "2022-01-01", end_date = "2022-12-31", npage 
            `LOB%` = parse_number(`LOB%`),
            start_date = as.Date(start_date),
            end_date = as.Date(end_date)
-           )
+    )
   return(fg_data)
 }
 
@@ -129,4 +129,4 @@ season_diff <- bind_rows(second_chunk, first_chunk) %>%
 
 write_csv(season_diff, "data/season_diff_test.csv")
 
-  
+
