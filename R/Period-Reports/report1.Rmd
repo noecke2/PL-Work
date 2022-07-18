@@ -1,8 +1,12 @@
 ---
-title: "PL Period Report"
+title: "PL Report"
 author: "Andrew Noecker"
-date: '2022-07-16'
-output: html_document
+date: "`r format(Sys.time(), '%B %d, %Y')`"
+output: 
+  html_document:
+    theme: cerulean
+    toc: true
+    toc_float: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -14,12 +18,12 @@ library(DT)
 library(rvest)
 library(tidyverse)
 
-source("R/Period Reports/pitcher_diff.r")
-source("R/Period Reports/batter_diff.r")
+source("R/Period-Reports/pitcher_diff.r")
+source("R/Period-Reports/batter_diff.r")
 ```
 
 
-```{r Define Termi Hitters}
+```{r Define Termi Roster}
 # Termi hitters
 termi_hitters <- c("Daulton Varsho",
                    "Freddie Freeman",
@@ -40,22 +44,156 @@ termi_hitters <- c("Daulton Varsho",
                    "Joey Votto",
                    "Tommy Pham",
                    "Seiya Suzuki")
+
+termi_pitchers <- c("Shane McClanahan",
+                    "Julio Urias",
+                    "Sandy Alcantara",
+                    "Yu Darvish",
+                    "Reid Detmers",
+                    "Dylan Cease",
+                    "Clay Holmes",
+                    "Ryan Helsley",
+                    "Nick Lodolo",
+                    "Andres Munoz",
+                    "Josiah Gray",
+                    "Triston McKenzie", 
+                    "Hunter Greene",
+                    "Brett Martin",
+                    "Aaron Ashby",
+                    "Patrick Sandoval")
 ```
 
 
 
-# Hitter Reports
+# **Hitter Reports**
 
 ## 15 Days 
 
-#### Termi Hitters
+
+
+### Terminoeckers
 
 ```{r}
 batters15 <- fg_batter_stats(Sys.Date() - 15, Sys.Date(), qual = 5) 
 
-termis15 <- batters15 %>%
+termis_hitters15 <- batters15 %>%
   filter(Name %in% termi_hitters) %>% 
   select(1:9, 24:29, 10:23, 30:31)
+
+# termis_hitters15 %>% 
+#   gt() %>% 
+#   data_color(
+#     columns = `Barrel%`,
+#     colors = scales::col_numeric(
+#       palette = c("red", "orange", "green", "blue"),
+#       domain = c(0, 35)
+#     )
+#   ) %>%
+#   data_color(
+#     columns = `HardHit%`,
+#     colors = scales::col_numeric(
+#       palette = c("red", "green"),
+#       domain = c(0, 70)
+#     )
+#   ) %>%
+#   tab_header(
+#     title = "Termi Hitters 15 Day Report",
+#     subtitle = "Arranged in descending barrel%"
+#   )
+
+datatable(termis_hitters15, options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50)
+))
+
+```
+
+### MLB
+
+```{r}
+datatable(batters15, filter = 'top', options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100)
+))
+```
+
+## 30 Days 
+
+
+
+
+### Terminoeckers 
+
+```{r}
+batters30 <- fg_batter_stats(Sys.Date() - 30, Sys.Date(), qual = 5) 
+
+termis_hitters30 <- batters30 %>%
+  filter(Name %in% termi_hitters)%>% 
+  select(1:9, 24:29, 10:23, 30:31)
+
+datatable(termis_hitters30, options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50)
+))
+```
+
+### MLB
+
+```{r}
+datatable(batters30, filter = 'top', options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100)
+))
+```
+
+
+## 45 Days 
+
+
+
+### Terminoeckers 
+
+```{r}
+batters45 <- fg_batter_stats(Sys.Date() - 45, Sys.Date(), qual = 5) 
+
+termis_hitters45 <- batters45 %>%
+  filter(Name %in% termi_hitters)%>% 
+  select(1:9, 24:29, 10:23, 30:31)
+
+datatable(termis_hitters45, options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50)
+))
+
+```
+
+
+### MLB
+
+```{r}
+datatable(batters45, filter = 'top', options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100)
+))
+```
+
+
+
+------- BREAK -----
+
+# **Pitcher Reports**
+
+## 15 Days 
+
+
+
+### Terminoeckers
+
+```{r}
+pitchers15 <- fg_pitcher_stats(Sys.Date() - 15, Sys.Date(), qual = 5) 
+
+termis_pitchers15 <- pitchers15 %>%
+  filter(Name %in% termi_pitchers)
 
 # termis15 %>% 
 #   gt() %>% 
@@ -78,17 +216,17 @@ termis15 <- batters15 %>%
 #     subtitle = "Arranged in descending barrel%"
 #   )
 
-datatable(termis15, options = list(
+datatable(termis_pitchers15, options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50)
 ))
 
 ```
 
-#### League Wide
+### MLB
 
 ```{r}
-datatable(batters15, filter = 'top', options = list(
+datatable(pitchers15, filter = 'top', options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50, 100)
 ))
@@ -97,25 +235,26 @@ datatable(batters15, filter = 'top', options = list(
 ## 30 Days 
 
 
-#### Termi Hitters 
+
+
+### Terminoeckers 
 
 ```{r}
-batters30 <- fg_batter_stats(Sys.Date() - 30, Sys.Date(), qual = 5) 
+pitchers30 <- fg_pitcher_stats(Sys.Date() - 30, Sys.Date(), qual = 5) 
 
-termis30 <- batters30 %>%
-  filter(Name %in% termi_hitters)%>% 
-  select(1:9, 24:29, 10:23, 30:31)
+termis_pitchers30 <- pitchers30 %>%
+  filter(Name %in% termi_pitchers)
 
-datatable(termis30, options = list(
+datatable(termis_pitchers30, options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50)
 ))
 ```
 
-#### League Wide
+### MLB
 
 ```{r}
-datatable(batters30, filter = 'top', options = list(
+datatable(pitchers30, filter = 'top', options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50, 100)
 ))
@@ -124,16 +263,17 @@ datatable(batters30, filter = 'top', options = list(
 
 ## 45 Days 
 
-#### Termi Hitters 
+
+
+### Terminoeckers 
 
 ```{r}
-batters45 <- fg_batter_stats(Sys.Date() - 45, Sys.Date(), qual = 5) 
+pitchers45 <- fg_pitcher_stats(Sys.Date() - 45, Sys.Date(), qual = 5) 
 
-termis45 <- batters45 %>%
-  filter(Name %in% termi_hitters)%>% 
-  select(1:9, 24:29, 10:23, 30:31)
+termis_pitchers45 <- pitchers45 %>%
+  filter(Name %in% termi_pitchers)
 
-datatable(termis45, options = list(
+datatable(termis_pitchers45, options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50)
 ))
@@ -141,15 +281,14 @@ datatable(termis45, options = list(
 ```
 
 
-#### League Wide
+### MLB
 
 ```{r}
-datatable(batters45, filter = 'top', options = list(
+datatable(pitchers45, filter = 'top', options = list(
   pageLength = 20,
   legnthMenu = c(5, 10, 20, 50, 100)
 ))
 ```
-
 
 
 
