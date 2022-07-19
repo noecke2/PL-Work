@@ -295,6 +295,91 @@ datatable(pitchers45, filter = 'top', options = list(
 
 
 
+# **Hitter Trends**
+
+Examination of who has improved the most over the past 20 days relative to 20 days prior
+
+### Terminoeckers
+
+Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
+
+Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
+
+* Note: PA1 is PAs during first time range, PA2 is PAs over last 20 days
+
+```{r}
+hitters_trends <- batter_diff("2022-03-01", # To start of the season
+            Sys.Date() - 21,
+            Sys.Date() - 20,
+            Sys.Date(),
+            qual1 = 20,
+            qual2 = 20) %>%
+    mutate_if(is.numeric, ~round(., 3))
+
+
+termis_hitters_trends <- hitters_trends %>%
+  filter(Name %in% termi_hitters)
+
+datatable(termis_hitters_trends, options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50)
+))
+
+```
+
+
+### MLB
+
+```{r}
+datatable(hitters_trends, filter = 'top', options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100)
+))
+```
+
+----------------- BREAK--------------
+
+# **Pitcher Trends**
+
+Examination of who has improved the most over the past 20 days relative to 20 days prior
+
+### Terminoeckers
+
+Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
+
+Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
+
+* Note: PA1 is PAs during first time range, PA2 is PAs over last 20 days
+
+```{r}
+pitchers_trends <- pitcher_diff("2022-03-01", # To start of the season
+            Sys.Date() - 21,
+            Sys.Date() - 20,
+            Sys.Date(),
+            qual1 = 20,
+            qual2 = 5) %>%
+    mutate_if(is.numeric, ~round(., 3))
+
+
+termis_pitchers_trends <- pitchers_trends %>%
+  filter(Name %in% termi_pitchers)
+
+datatable(termis_pitchers_trends, options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50)
+))
+
+```
+
+
+### MLB
+
+```{r}
+datatable(pitchers_trends, filter = 'top', options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100)
+))
+```
 
 
 
