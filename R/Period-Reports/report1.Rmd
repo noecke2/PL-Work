@@ -59,6 +59,7 @@ termi_pitchers <- c("Shane McClanahan",
                     "Triston McKenzie", 
                     "Hunter Greene",
                     "Brett Martin",
+                    "Jesus Luzardo",
                     "Aaron Ashby",
                     "Patrick Sandoval")
 ```
