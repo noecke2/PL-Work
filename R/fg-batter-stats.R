@@ -62,8 +62,8 @@ fg_batter_stats <- function(startdate = "2022-01-01", enddate = "2022-12-31", qu
   return(fg_data)
 }
 
-p4 <- fg_batter_stats("2022-06-06", "2022-06-25", qual = 30)
-p5 <- fg_batter_stats("2022-06-26", "2022-07-15", qual = 30)
+p4 <- fg_batter_stats("2022-06-06", "2022-06-25", qual = 10)
+p5 <- fg_batter_stats("2022-06-26", "2022-07-15", qual = 10)
 
 
 # Function to subtract the 2 date ranges
@@ -90,6 +90,8 @@ period4_5_diff <- period4_5_diff %>%
 # Order by descending barrel rate
 period4_5_diff <- period4_5_diff %>%
   arrange(-`Barrel%`)
+
+players <- c("Ty France", "Luke Voit", "Nico Hoerner", "Josh Donaldson", "Wilmer Flores", "Joey Votto", "Christian Yelich")
 
 # WRITE CSV
 write_csv(period4_5_diff, "data/p4-5-diff.csv")

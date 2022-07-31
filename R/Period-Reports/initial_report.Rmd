@@ -66,9 +66,9 @@ termi_pitchers <- c("Shane McClanahan",
 
 
 
-# **Hitter Reports** {.tabset .tabset-fade .tabset-pills}
+# **Hitter Reports**
 
-## 15 Days {.tabset .tabset-fade .tabset-pills}
+## 15 Days 
 
 
 
@@ -118,7 +118,7 @@ datatable(batters15, filter = 'top', options = list(
 ))
 ```
 
-## 30 Days {.tabset .tabset-fade .tabset-pills}
+## 30 Days 
 
 
 
@@ -148,7 +148,7 @@ datatable(batters30, filter = 'top', options = list(
 ```
 
 
-## 45 Days {.tabset .tabset-fade .tabset-pills}
+## 45 Days 
 
 
 
@@ -179,11 +179,12 @@ datatable(batters45, filter = 'top', options = list(
 ```
 
 
-------------
 
-# **Pitcher Reports** {.tabset .tabset-fade .tabset-pills}
+------- BREAK -----
 
-## 15 Days {.tabset .tabset-fade .tabset-pills}
+# **Pitcher Reports**
+
+## 15 Days 
 
 
 
@@ -232,7 +233,7 @@ datatable(pitchers15, filter = 'top', options = list(
 ))
 ```
 
-## 30 Days {.tabset .tabset-fade .tabset-pills}
+## 30 Days 
 
 
 
@@ -261,7 +262,7 @@ datatable(pitchers30, filter = 'top', options = list(
 ```
 
 
-## 45 Days {.tabset .tabset-fade .tabset-pills}
+## 45 Days 
 
 
 
@@ -295,11 +296,11 @@ datatable(pitchers45, filter = 'top', options = list(
 
 
 
-# **Hitter Trends** {.tabset .tabset-fade .tabset-pills}
+# **Hitter Trends**
 
 Examination of who has improved the most over the past 20 days relative to 20 days prior
 
-## Terminoeckers
+### Terminoeckers
 
 Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
 
@@ -328,7 +329,7 @@ datatable(termis_hitters_trends, options = list(
 ```
 
 
-## MLB
+### MLB
 
 ```{r}
 datatable(hitters_trends, filter = 'top', options = list(
@@ -337,19 +338,19 @@ datatable(hitters_trends, filter = 'top', options = list(
 ))
 ```
 
--------------------------------
+----------------- BREAK--------------
 
-# **Pitcher Trends** {.tabset .tabset-fade .tabset-pills}
+# **Pitcher Trends**
 
 Examination of who has improved the most over the past 20 days relative to 20 days prior
 
-## Terminoeckers
+### Terminoeckers
 
 Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
 
 Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
 
-* Note: IP1 is IPs during first time range, IP2 is IPs over last 20 days
+* Note: PA1 is PAs during first time range, PA2 is PAs over last 20 days
 
 ```{r}
 pitchers_trends <- pitcher_diff("2022-03-01", # To start of the season
@@ -372,7 +373,7 @@ datatable(termis_pitchers_trends, options = list(
 ```
 
 
-## MLB
+### MLB
 
 ```{r}
 datatable(pitchers_trends, filter = 'top', options = list(

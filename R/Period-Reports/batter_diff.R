@@ -12,12 +12,24 @@ batter_diff <- function(startdate1 = "2021-01-01", enddate1 = "2021-12-31", star
   
   # Combining the 2 chunks, calculating differences (second chunk - first_chunk)
   all_qual <- bind_rows(second_chunk, first_chunk) 
+
   
   season_diff <- all_qual %>%
     select(-`#`) %>%
     group_by(Name, Team) %>% 
     summarize_at(vars(-group_cols(), -start_date, -end_date), minus) %>%
     ungroup()
+  
+  # Adding PA numbers for both time periods for easier comparison
+  season_diff <- season_diff %>%
+    left_join(select(first_chunk, Name, Team, PA), 
+              by = c("Name", "Team")) %>%
+    left_join(select(second_chunk, Name, Team, PA),
+              by = c("Name", "Team")) %>%
+    rename(PA_Diff = "PA.x",
+           PA1 = "PA.y",
+           PA2 = "PA") %>%
+    select(1:3, 29:30, 4:28)
   
   # Getting rid of players who didn't show up in both
   player_quals <- all_qual %>%

@@ -67,23 +67,22 @@ fg_data %>% view()
 
 colnames(fg_data)
 
-start_date <- "2022-05-28"
-end_date <- Sys.Date()
-npage = 1
-qual = 30
+startdate <- "2022-06-26"
+enddate <- Sys.Date() - 1
+qual = 5
 
 
 
-test_func <- function(start_date = "2022-01-01", end_date = "2022-12-31", npage = 1, qual = "y"){
+fg_pitcher_stats <- function(startdate = "2022-01-01", enddate = "2022-12-31", qual = "y"){
   
   # Grab fg URL
   url <- paste0("https://www.fangraphs.com/leaders.aspx?pos=all&stats=pit&lg=all&qual=",
                 qual,
-                "&type=1&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
+                "&type=c,13,4,24,11,6,42,-1,120,121,217,-1,36,37,38,40,-1,41,43,44,-1,14,322,323,325,328,-1,117,118,119,-1,45,124,-1,62,122&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
                 start_date, 
                 "&enddate=",
                 end_date,
-                "&sort=9,d&page=1_100000")
+                "&sort=11,d&page=1_100000")
   
   wp <- read_html(url)
   
@@ -104,13 +103,11 @@ test_func <- function(start_date = "2022-01-01", end_date = "2022-12-31", npage 
   
   # Parse numbers as appropriate
   fg_data <- fg_data %>%
-    mutate(`K%` = parse_number(`K%`),
-           `BB%` = parse_number(`BB%`),
-           `K-BB%` = parse_number(`K-BB%`),
-           `LOB%` = parse_number(`LOB%`),
-           start_date = as.Date(start_date),
-           end_date = as.Date(end_date)
-    )
+    mutate(across(-c("Name", "Team"), as.character)) %>%
+    mutate(across(-c("Name", "Team"), parse_number)) %>% 
+    mutate(start_date = as.Date(startdate),
+           end_date = as.Date(enddate))
+  
   return(fg_data)
 }
 
@@ -118,15 +115,25 @@ test_func <- function(start_date = "2022-01-01", end_date = "2022-12-31", npage 
 minus <- function(x) sum(x[1],na.rm=T) - sum(x[2],na.rm=T)
 
 # Two chunks of the season
-first_chunk <- test_func("2022-03-15", "2022-05-31", qual = 20)
-second_chunk <- test_func("2022-06-01", Sys.Date(), qual = 20)
+first_chunk <- test_func("2022-06-05", "2022-06-25", qual = 5)
+second_chunk <- test_func("2022-06-26", Sys.Date(), qual = 5)
 
 # Combining the 2 chunks, calculating differences (second chunk - first_chunk)
 season_diff <- bind_rows(second_chunk, first_chunk) %>% 
   select(-`#`) %>%
   group_by(Name, Team) %>% 
-  summarize_at(vars(-group_cols(), -start_date, -end_date), minus)
+  summarize_at(vars(-group_cols(), -start_date, -end_date), minus) %>%
+  ungroup()
 
-write_csv(season_diff, "data/season_diff_test.csv")
+player_quals <- bind_rows(second_chunk, first_chunk) %>%
+  count(Name, Team)
+
+season_diff <- season_diff %>%
+  mutate(qual_periods = player_quals$n) %>%
+  filter(qual_periods == 2)
+
+players <- c("Tanner Scott", "Brett Martin", "Reid Detmers", "Nick Lodolo", "Patrick Sandoval")
+
+write_csv(season_diff, "data/p4-5-pitcher-diff.csv")
 
 

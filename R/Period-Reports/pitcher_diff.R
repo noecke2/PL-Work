@@ -23,6 +23,16 @@ pitcher_diff <- function(startdate1 = "2021-01-01", enddate1 = "2021-12-31", sta
     summarize_at(vars(-group_cols(), -start_date, -end_date), minus) %>%
     ungroup()
   
+  # Adding IP numbers for both time periods for easier comparison
+  season_diff <- season_diff %>%
+    left_join(select(first_chunk, Name, Team, IP), 
+              by = c("Name", "Team")) %>%
+    left_join(select(second_chunk, Name, Team, IP),
+              by = c("Name", "Team")) %>%
+    rename(IP_Diff = "IP.x",
+           IP1 = "IP.y",
+           IP2 = "IP") %>%
+    select(1:3, 31:32, 4:30)
   
   # Getting rid of players who didn't show up in both
   player_quals <- all_qual %>%
