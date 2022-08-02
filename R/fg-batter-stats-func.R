@@ -8,11 +8,11 @@ fg_batter_stats <- function(startdate = "2022-01-01", enddate = "2022-12-31", qu
   # Grab fg URL
   url <- paste0("https://www.fangraphs.com/leaders.aspx?pos=all&stats=bat&lg=all&qual=",
                 qual,
-                "&type=c,6,34,35,36,308,311,-1,23,37,38,39,-1,40,60,41,-1,201,205,200,-1,52,51,50,61,-1,12,7,14,11,13,21&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
+                "&type=c,6,12,7,14,11,13,21,-1,34,35,36,308,311,305,306,-1,23,37,38,39,-1,40,60,41,-1,52,61,51,50&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
                 startdate, 
                 "&enddate=",
                 enddate,
-                "&sort=7,d&page=1_100000")
+                "&sort=13,d&page=1_100000")
   
   wp <- read_html(url)
   

@@ -32,7 +32,7 @@ pitcher_diff <- function(startdate1 = "2021-01-01", enddate1 = "2021-12-31", sta
     rename(IP_Diff = "IP.x",
            IP1 = "IP.y",
            IP2 = "IP") %>%
-    select(1:3, 31:32, 4:30)
+    select(1:3, 33:34, 4:32)
   
   # Getting rid of players who didn't show up in both
   player_quals <- all_qual %>%

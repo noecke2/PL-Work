@@ -5,7 +5,7 @@ fg_pitcher_stats <- function(startdate = "2022-01-01", enddate = "2022-12-31", q
   # Grab fg URL
   url <- paste0("https://www.fangraphs.com/leaders.aspx?pos=all&stats=pit&lg=all&qual=",
                 qual,
-                "&type=c,13,4,24,11,6,42,-1,120,121,217,-1,36,37,38,40,-1,41,43,44,-1,14,322,323,325,328,-1,117,118,119,-1,45,124,-1,62,122&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
+                "&type=c,13,4,24,11,6,42,-1,120,121,217,-1,14,322,323,325,328,-1,122,330,331,-1,41,43,44,-1,117,118,119,-1,45,124,-1,62,36,37,38,40&season=2022&month=1000&season1=2022&ind=0&team=0&rost=0&age=0&filter=&players=0&startdate=",
                 startdate, 
                 "&enddate=",
                 enddate,

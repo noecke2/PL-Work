@@ -29,7 +29,7 @@ batter_diff <- function(startdate1 = "2021-01-01", enddate1 = "2021-12-31", star
     rename(PA_Diff = "PA.x",
            PA1 = "PA.y",
            PA2 = "PA") %>%
-    select(1:3, 29:30, 4:28)
+    select(1:3, 28:29, 4:27)
   
   # Getting rid of players who didn't show up in both
   player_quals <- all_qual %>%
