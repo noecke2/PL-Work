@@ -379,6 +379,7 @@ Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
 
 * Note: IP1 is IPs during first time range, IP2 is IPs over last 20 days
 
+
 ```{r}
 pitchers_trends <- pitcher_diff("2022-03-01", # To start of the season
             Sys.Date() - 21,
