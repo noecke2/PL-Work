@@ -44,7 +44,8 @@ termi_hitters <- c("Daulton Varsho",
                    "Tommy Pham",
                    "Seiya Suzuki",
                    "Lars Nootbaar",
-                   "Steven Kwan")
+                   "Steven Kwan",
+                   "Paul DeJong")
 
 termi_pitchers <- c("Shane McClanahan",
                     "Julio Urias",
@@ -62,8 +63,7 @@ termi_pitchers <- c("Shane McClanahan",
                     "Jesus Luzardo",
                     "Aaron Ashby",
                     "Patrick Sandoval",
-                    "Jonathan Hernandez",
-                    "Mitch White")
+                    "Jonathan Hernandez")
 ```
 
 
