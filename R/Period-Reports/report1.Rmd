@@ -25,45 +25,45 @@ source("R/Period-Reports/batter_diff.r")
 
 ```{r Define Termi Roster}
 # Termi hitters
-termi_hitters <- c("Daulton Varsho",
-                   "Freddie Freeman",
-                   "Trea Turner",
-                   "Wilmer Flores",
-                   "Jeremy Pena", 
-                   "Luke Voit",
-                   "Nico Hoerner",
-                   "Byron Buxton",
-                   "Nick Castellanos",
-                   "Randy Arozarena",
-                   "Christian Yelich",
+termi_hitters <- c("J.T. Realmuto",
+                   "Rowdy Tellez",
+                   "Mookie Betts",
+                   "Austin Riley",
+                   "Corey Seager",
+                   "Triston Casas",
+                   "Brandon Lowe",
+                   "Juan Soto",
+                   "Kris Bryant",
                    "Hunter Renfroe",
-                   "Christopher Morel",
-                   "Ty France",
-                   "Tommy Pham",
-                   "Seiya Suzuki",
                    "Lars Nootbaar",
-                   "Steven Kwan",
-                   "Ha-Seong Kim",
-                   "Kerry Carpenter",
-                   "Emmanuel Rivera")
+                   "Miguel Vargas",
+                   "Cody Bellinger",
+                   "Wil Myers",
+                   "Garrett Mitchell",
+                   "Seth Brown",
+                   "Nolan Gorman",
+                   "Vaughn Grissom",
+                   "Mitch Garver",
+                   "Jared Walsh"
+                   )
 
-termi_pitchers <- c("Shane McClanahan",
-                    "Julio Urias",
-                    "Sandy Alcantara",
-                    "Yu Darvish",
-                    "Reid Detmers",
-                    "Dylan Cease",
-                    "Clay Holmes",
-                    "Ryan Helsley",
-                    "Nick Lodolo",
-                    "Andres Munoz",
-                    "Josiah Gray",
-                    "Triston McKenzie", 
-                    "Hunter Greene",
-                    "Jesus Luzardo",
-                    "Aaron Ashby",
-                    "Patrick Sandoval",
-                    "Jonathan Hernandez")
+termi_pitchers <- c("Josiah Gray",
+                    "Justin Verlander",
+                    "Zack Wheeler",
+                    "George Kirby",
+                    "Lance Lynn",
+                    "Seth Lugo",
+                    "Felix Bautista",
+                    "Seranthony Dominguez",
+                    "Nathan Eovaldi",
+                    "David Peterson",
+                    "Clarke Schmidt",
+                    "Mitch Keller",
+                    "Nick Martinez",
+                    "Alex Lange",
+                    "Brandon Pfaadt",
+                    "Triston McKenzie"
+                    )
 ```
 
 
@@ -207,7 +207,6 @@ datatable(batters40, filter = 'top', options = list(
 ```
 
 
-
 ------------
 
 # **Pitcher Reports** {.tabset .tabset-fade .tabset-pills}
@@ -219,7 +218,7 @@ datatable(batters40, filter = 'top', options = list(
 ### Terminoeckers
 
 ```{r}
-pitchers15 <- fg_pitcher_stats(Sys.Date() - 15, Sys.Date(), qual = 5) 
+pitchers15 <- fg_pitcher_stats(Sys.Date() - 15, Sys.Date(), qual = 2) 
 
 termis_pitchers15 <- pitchers15 %>%
   filter(Name %in% termi_pitchers)
@@ -269,7 +268,7 @@ datatable(pitchers15, filter = 'top', options = list(
 ### Terminoeckers 
 
 ```{r}
-pitchers30 <- fg_pitcher_stats(Sys.Date() - 30, Sys.Date(), qual = 5) 
+pitchers30 <- fg_pitcher_stats(Sys.Date() - 30, Sys.Date(), qual = 2) 
 
 termis_pitchers30 <- pitchers30 %>%
   filter(Name %in% termi_pitchers)
@@ -323,93 +322,92 @@ datatable(pitchers45, filter = 'top', options = list(
 
 
 
+<!-- # **Hitter Trends** {.tabset .tabset-fade .tabset-pills} -->
 
-# **Hitter Trends** {.tabset .tabset-fade .tabset-pills}
+<!-- Examination of who has improved the most over the past 20 days relative to 20 days prior -->
 
-Examination of who has improved the most over the past 20 days relative to 20 days prior
+<!-- ## Terminoeckers -->
 
-## Terminoeckers
+<!-- Time range 1: **Opening Day** to **`r Sys.Date() - 21`** -->
 
-Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
+<!-- Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`** -->
 
-Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
+<!-- * Note: PA1 is PAs during first time range, PA2 is PAs over last 20 days -->
 
-* Note: PA1 is PAs during first time range, PA2 is PAs over last 20 days
-
-```{r}
-hitters_trends <- batter_diff("2022-03-01", # To start of the season
-            Sys.Date() - 21,
-            Sys.Date() - 20,
-            Sys.Date(),
-            qual1 = 20,
-            qual2 = 20) %>%
-    mutate_if(is.numeric, ~round(., 3))
-
-
-termis_hitters_trends <- hitters_trends %>%
-  filter(Name %in% termi_hitters)
-
-datatable(termis_hitters_trends, options = list(
-  pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
-))
-
-```
+<!-- ```{r} -->
+<!-- hitters_trends <- batter_diff("2023-03-01", # To start of the season -->
+<!--             Sys.Date() - 21, -->
+<!--             Sys.Date() - 20, -->
+<!--             Sys.Date(), -->
+<!--             qual1 = 20, -->
+<!--             qual2 = 20) %>% -->
+<!--     mutate_if(is.numeric, ~round(., 3)) -->
 
 
-## MLB
+<!-- termis_hitters_trends <- hitters_trends %>% -->
+<!--   filter(Name %in% termi_hitters) -->
 
-```{r}
-datatable(hitters_trends, filter = 'top', options = list(
-  pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
-))
-```
+<!-- datatable(termis_hitters_trends, options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50) -->
+<!-- )) -->
 
--------------------------------
-
-# **Pitcher Trends** {.tabset .tabset-fade .tabset-pills}
-
-Examination of who has improved the most over the past 20 days relative to 20 days prior
-
-## Terminoeckers
-
-Time range 1: **Opening Day** to **`r Sys.Date() - 21`**
-
-Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`**
-
-* Note: IP1 is IPs during first time range, IP2 is IPs over last 20 days
+<!-- ``` -->
 
 
-```{r}
-pitchers_trends <- pitcher_diff("2022-03-01", # To start of the season
-            Sys.Date() - 21,
-            Sys.Date() - 20,
-            Sys.Date(),
-            qual1 = 20,
-            qual2 = 5) %>%
-    mutate_if(is.numeric, ~round(., 3))
+<!-- ## MLB -->
+
+<!-- ```{r} -->
+<!-- datatable(hitters_trends, filter = 'top', options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50, 100) -->
+<!-- )) -->
+<!-- ``` -->
+
+<!-- ------------------------------- -->
+
+<!-- # **Pitcher Trends** {.tabset .tabset-fade .tabset-pills} -->
+
+<!-- Examination of who has improved the most over the past 20 days relative to 20 days prior -->
+
+<!-- ## Terminoeckers -->
+
+<!-- Time range 1: **Opening Day** to **`r Sys.Date() - 21`** -->
+
+<!-- Time range 2: **`r Sys.Date()-20`** to **`r Sys.Date()`** -->
+
+<!-- * Note: IP1 is IPs during first time range, IP2 is IPs over last 20 days -->
 
 
-termis_pitchers_trends <- pitchers_trends %>%
-  filter(Name %in% termi_pitchers)
+<!-- ```{r} -->
+<!-- pitchers_trends <- pitcher_diff("2023-03-01", # To start of the season -->
+<!--             Sys.Date() - 21, -->
+<!--             Sys.Date() - 20, -->
+<!--             Sys.Date(), -->
+<!--             qual1 = 20, -->
+<!--             qual2 = 5) %>% -->
+<!--     mutate_if(is.numeric, ~round(., 3)) -->
 
-datatable(termis_pitchers_trends, options = list(
-  pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
-))
 
-```
+<!-- termis_pitchers_trends <- pitchers_trends %>% -->
+<!--   filter(Name %in% termi_pitchers) -->
+
+<!-- datatable(termis_pitchers_trends, options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50) -->
+<!-- )) -->
+
+<!-- ``` -->
 
 
-## MLB
+<!-- ## MLB -->
 
-```{r}
-datatable(pitchers_trends, filter = 'top', options = list(
-  pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
-))
-```
+<!-- ```{r} -->
+<!-- datatable(pitchers_trends, filter = 'top', options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50, 100) -->
+<!-- )) -->
+<!-- ``` -->
 
 
 
