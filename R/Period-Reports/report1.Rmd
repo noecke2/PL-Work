@@ -6,7 +6,6 @@ output:
   html_document:
     theme: cerulean
     toc: true
-    toc_float: true
 editor_options: 
   chunk_output_type: console
 ---
@@ -103,9 +102,16 @@ termis_hitters10 <- batters10 %>%
 #     subtitle = "Arranged in descending barrel%"
 #   )
 
-datatable(termis_hitters10, options = list(
+datatable(termis_hitters10, 
+          rownames = FALSE,
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 
 ```
@@ -113,9 +119,16 @@ datatable(termis_hitters10, options = list(
 ### MLB
 
 ```{r}
-datatable(batters10, filter = 'top', options = list(
+datatable(batters10, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -132,18 +145,32 @@ batters20 <- fg_batter_stats(Sys.Date() - 20, Sys.Date(), qual = 5)
 termis_hitters20 <- batters20 %>%
   filter(Name %in% termi_hitters)
 
-datatable(termis_hitters20, options = list(
+datatable(termis_hitters20, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
 ### MLB
 
 ```{r}
-datatable(batters20, filter = 'top', options = list(
+datatable(batters20, filter = 'top',
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -160,9 +187,16 @@ batters30 <- fg_batter_stats(Sys.Date() - 30, Sys.Date(), qual = 5)
 termis_hitters30 <- batters30 %>%
   filter(Name %in% termi_hitters)
 
-datatable(termis_hitters30, options = list(
+datatable(termis_hitters30, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 
 ```
@@ -171,9 +205,16 @@ datatable(termis_hitters30, options = list(
 ### MLB
 
 ```{r}
-datatable(batters30, filter = 'top', options = list(
+datatable(batters30, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -189,9 +230,16 @@ batters40 <- fg_batter_stats(Sys.Date() - 40, Sys.Date(), qual = 5)
 termis_hitters40 <- batters40 %>%
   filter(Name %in% termi_hitters)
 
-datatable(termis_hitters40, options = list(
+datatable(termis_hitters40, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 
 ```
@@ -200,9 +248,16 @@ datatable(termis_hitters40, options = list(
 ### MLB
 
 ```{r}
-datatable(batters40, filter = 'top', options = list(
+datatable(batters40, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -244,9 +299,16 @@ termis_pitchers15 <- pitchers15 %>%
 #     subtitle = "Arranged in descending barrel%"
 #   )
 
-datatable(termis_pitchers15, options = list(
+datatable(termis_pitchers15, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 
 ```
@@ -254,9 +316,16 @@ datatable(termis_pitchers15, options = list(
 ### MLB
 
 ```{r}
-datatable(pitchers15, filter = 'top', options = list(
+datatable(pitchers15, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -273,18 +342,32 @@ pitchers30 <- fg_pitcher_stats(Sys.Date() - 30, Sys.Date(), qual = 2)
 termis_pitchers30 <- pitchers30 %>%
   filter(Name %in% termi_pitchers)
 
-datatable(termis_pitchers30, options = list(
+datatable(termis_pitchers30, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
 ### MLB
 
 ```{r}
-datatable(pitchers30, filter = 'top', options = list(
+datatable(pitchers30, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
@@ -301,9 +384,16 @@ pitchers45 <- fg_pitcher_stats(Sys.Date() - 45, Sys.Date(), qual = 5)
 termis_pitchers45 <- pitchers45 %>%
   filter(Name %in% termi_pitchers)
 
-datatable(termis_pitchers45, options = list(
+datatable(termis_pitchers45, 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50)
+  legnthMenu = c(5, 10, 20, 50),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 
 ```
@@ -312,9 +402,16 @@ datatable(termis_pitchers45, options = list(
 ### MLB
 
 ```{r}
-datatable(pitchers45, filter = 'top', options = list(
+datatable(pitchers45, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
   pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50, 100)
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
 ))
 ```
 
