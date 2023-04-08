@@ -19,50 +19,19 @@ library(tidyverse)
 
 source("R/Period-Reports/pitcher_diff.r")
 source("R/Period-Reports/batter_diff.r")
+source("R/Period-Reports/rosters.r")
 ```
 
 
 ```{r Define Termi Roster}
 # Termi hitters
-termi_hitters <- c("J.T. Realmuto",
-                   "Rowdy Tellez",
-                   "Mookie Betts",
-                   "Austin Riley",
-                   "Corey Seager",
-                   "Triston Casas",
-                   "Brandon Lowe",
-                   "Juan Soto",
-                   "Kris Bryant",
-                   "Hunter Renfroe",
-                   "Lars Nootbaar",
-                   "Miguel Vargas",
-                   "Cody Bellinger",
-                   "Wil Myers",
-                   "Garrett Mitchell",
-                   "Seth Brown",
-                   "Nolan Gorman",
-                   "Vaughn Grissom",
-                   "Mitch Garver",
-                   "Jared Walsh"
-                   )
+termi_hitters <- termis %>%
+  inner_join(hitters, by = c("Name" = "HITTERS")) %>%
+  pull(Name)
 
-termi_pitchers <- c("Josiah Gray",
-                    "Justin Verlander",
-                    "Zack Wheeler",
-                    "George Kirby",
-                    "Lance Lynn",
-                    "Seth Lugo",
-                    "Felix Bautista",
-                    "Seranthony Dominguez",
-                    "Nathan Eovaldi",
-                    "David Peterson",
-                    "Clarke Schmidt",
-                    "Mitch Keller",
-                    "Nick Martinez",
-                    "Alex Lange",
-                    "Brandon Pfaadt",
-                    "Triston McKenzie"
-                    )
+termi_pitchers <- termis %>%
+  inner_join(pitchers, by = c("Name" = "PITCHERS")) %>%
+  pull(Name)  
 ```
 
 
@@ -132,6 +101,31 @@ datatable(batters10, filter = 'top',
 ))
 ```
 
+
+
+### Free Agents
+
+```{r}
+
+free_agents10 <- batters10 %>%
+  anti_join(long_rosters, by = "Name")
+
+
+datatable(free_agents10, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
+))
+```
+
+
+
 ## 20 Days {.tabset .tabset-fade .tabset-pills}
 
 
@@ -173,6 +167,28 @@ datatable(batters20, filter = 'top',
   searching = TRUE
 ))
 ```
+
+### Free Agents
+
+```{r}
+
+free_agents20 <- batters20 %>%
+  anti_join(long_rosters, by = "Name")
+
+
+datatable(free_agents20, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
+))
+```
+
 
 
 ## 30 Days {.tabset .tabset-fade .tabset-pills}
@@ -218,37 +234,15 @@ datatable(batters30, filter = 'top',
 ))
 ```
 
-## 40 Days {.tabset .tabset-fade .tabset-pills}
-
-
-
-### Terminoeckers 
+### Free Agents
 
 ```{r}
-batters40 <- fg_batter_stats(Sys.Date() - 40, Sys.Date(), qual = 5) 
 
-termis_hitters40 <- batters40 %>%
-  filter(Name %in% termi_hitters)
-
-datatable(termis_hitters40, 
-          rownames = FALSE, 
-          extensions = "FixedColumns",
-          options = list(
-  pageLength = 20,
-  legnthMenu = c(5, 10, 20, 50),
-  fixedColumns = list(leftColumns = 2),
-  paging = TRUE, 
-  scrollX = TRUE, 
-  searching = TRUE
-))
-
-```
+free_agents30 <- batters30 %>%
+  anti_join(long_rosters, by = "Name")
 
 
-### MLB
-
-```{r}
-datatable(batters40, filter = 'top', 
+datatable(free_agents30, filter = 'top', 
           rownames = FALSE, 
           extensions = "FixedColumns",
           options = list(
@@ -260,6 +254,72 @@ datatable(batters40, filter = 'top',
   searching = TRUE
 ))
 ```
+
+
+<!-- ## 40 Days {.tabset .tabset-fade .tabset-pills} -->
+
+
+
+<!-- ### Terminoeckers  -->
+
+<!-- ```{r} -->
+<!-- batters40 <- fg_batter_stats(Sys.Date() - 40, Sys.Date(), qual = 5)  -->
+
+<!-- termis_hitters40 <- batters40 %>% -->
+<!--   filter(Name %in% termi_hitters) -->
+
+<!-- datatable(termis_hitters40,  -->
+<!--           rownames = FALSE,  -->
+<!--           extensions = "FixedColumns", -->
+<!--           options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50), -->
+<!--   fixedColumns = list(leftColumns = 2), -->
+<!--   paging = TRUE,  -->
+<!--   scrollX = TRUE,  -->
+<!--   searching = TRUE -->
+<!-- )) -->
+
+<!-- ``` -->
+
+
+<!-- ### MLB -->
+
+<!-- ```{r} -->
+<!-- datatable(batters40, filter = 'top',  -->
+<!--           rownames = FALSE,  -->
+<!--           extensions = "FixedColumns", -->
+<!--           options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50, 100), -->
+<!--   fixedColumns = list(leftColumns = 2), -->
+<!--   paging = TRUE,  -->
+<!--   scrollX = TRUE,  -->
+<!--   searching = TRUE -->
+<!-- )) -->
+<!-- ``` -->
+
+<!-- ### Free Agents -->
+
+<!-- ```{r} -->
+
+<!-- free_agents40 <- batters40 %>% -->
+<!--   anti_join(long_rosters, by = "Name") -->
+
+
+<!-- datatable(free_agents40, filter = 'top',  -->
+<!--           rownames = FALSE,  -->
+<!--           extensions = "FixedColumns", -->
+<!--           options = list( -->
+<!--   pageLength = 20, -->
+<!--   legnthMenu = c(5, 10, 20, 50, 100), -->
+<!--   fixedColumns = list(leftColumns = 2), -->
+<!--   paging = TRUE,  -->
+<!--   scrollX = TRUE,  -->
+<!--   searching = TRUE -->
+<!-- )) -->
+<!-- ``` -->
+
 
 
 ------------
@@ -329,6 +389,28 @@ datatable(pitchers15, filter = 'top',
 ))
 ```
 
+### Free Agents
+
+```{r}
+
+free_agents15 <- pitchers15 %>%
+  anti_join(long_rosters, by = "Name")
+
+
+datatable(free_agents15, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
+))
+```
+
+
 ## 30 Days {.tabset .tabset-fade .tabset-pills}
 
 
@@ -370,6 +452,28 @@ datatable(pitchers30, filter = 'top',
   searching = TRUE
 ))
 ```
+
+### Free Agents
+
+```{r}
+
+free_agents30 <- pitchers30 %>%
+  anti_join(long_rosters, by = "Name")
+
+
+datatable(free_agents30, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
+))
+```
+
 
 
 ## 45 Days {.tabset .tabset-fade .tabset-pills}
@@ -414,6 +518,28 @@ datatable(pitchers45, filter = 'top',
   searching = TRUE
 ))
 ```
+
+### Free Agents
+
+```{r}
+
+free_agents45 <- pitchers45 %>%
+  anti_join(long_rosters, by = "Name")
+
+
+datatable(free_agents45, filter = 'top', 
+          rownames = FALSE, 
+          extensions = "FixedColumns",
+          options = list(
+  pageLength = 20,
+  legnthMenu = c(5, 10, 20, 50, 100),
+  fixedColumns = list(leftColumns = 2),
+  paging = TRUE, 
+  scrollX = TRUE, 
+  searching = TRUE
+))
+```
+
 
 
 
