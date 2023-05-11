@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>A Bayesian Look at Nonidentifiability: A Simple Example</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Andrew Noecker" />
+    <meta name="date" content="2023-05-10" />
+    <script src="Stat-Theory-Presentation_files/header-attrs/header-attrs.js"></script>
+    <link rel="stylesheet" href="xaringan-themer.css" type="text/css" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# A Bayesian Look at Nonidentifiability: A Simple Example
+]
+.subtitle[
+## By Sergio Wechsler, Rafael Izbicki and Luís Gustavo Esteves
+]
+.author[
+### Andrew Noecker
+]
+.date[
+### 2023-05-10
+]
+
+---
+
+
+
+
+
+
+
+
+
+
+## The Basic Idea
+
+- A model is identifiable IF:
+
+
+`\(P_{\theta_1}(X = x) = P_{\theta_2}(X = x) \text{ implies that } \theta_1 = \theta_2\)`
+
+--
+
+
+- In other words, there can't be two different values of `\(\theta\)` that generate identical likelihood functions.
+
+
+
+- When we have a nonidentifiable model, we can take a Bayesian approach to develop a solution
+
+
+
+&lt;!-- Text can be **bold**, _italic_, ~~strikethrough~~, or `inline code`. --&gt;
+
+---
+
+## How it relates to information
+
+- Suppose parts in a factory defect for one of two reasons, which occur with probabilities `\(p_1 \text{ and } p_2\)`, respectively. 
+
+
+- Then the probability of a part being adequate is `\(1 - p_1 - p_2\)` and the probability of a part being defective is `\(p_1 + p_2\)`
+
+
+- Now suppose we sample n items `\(\rightarrow X \sim Binom(n, p_1 + p_2)\)`
+
+
+- No matter what data we observe, we will not be fully informed on `\(p_1\)` and `\(p_2\)` individually. 
+
+
+---
+
+## A Simple Example (Connecting to Book Club!)
+
+- Suppose the following situation is presented:
+
+  1. A missing plane has crashed in one of *n* possible regions
+
+--
+
+  2. A search is performed in region *i*, with probability `\(p_i\)` the plane has crashed there and probability `\(\alpha_i\)` that you recover the plane given the plane is in region *i*
+
+--
+
+  3. Our parameter of interest is `\(\theta\)` - the region where the plane went down
+
+--
+
+  4. We observe our random variable `\(X\)`, where `\(X = \{0, 1\}\)` - the plane is found in the region or it is not found. So, `\(P(X = 1 | \theta = i) = \alpha_i\)`
+
+--
+
+### Why this is nonidentifiable
+
+If `\(\theta_1, \theta_2 \neq i\)` (i.e the plane is not found in these regions), then `\(P(X = x | \theta_1) = P(X = x | \theta_2) = 1_{\{0\}}(x)\)`
+
+
+---
+
+
+## How Bayes can Help Address Nonidentiability
+
+- We can use Bayes to derive a posterior distribution of X even in the absence of identifiability
+
+
+$$ 
+P(\theta = j | X = x) = \frac{P(\theta = j)P(X =x | \theta = j)}{\sum_{k=1}^n P(\theta = k)P(X = x | \theta = k)}
+$$
+- If `\(x = 1\)`, then we've found the plane and this is equal to 1. But if `\(x = 0\)`, then:
+
+
+
+
+&lt;center&gt; 
+`\(P(\theta = j | X = 0) = \frac{p_j}{1 - \alpha_ip_i}(1 - 1_{\{i\}}(j)) + \frac{(1 - \alpha_i)p_i}{1 - \alpha_ip_i} \cdot1_{\{i\}}(j)\)`
+&lt;/center&gt;
+
+
+
+---
+
+## Continuing with the Plane Example: The Importance of Priors
+
+- Suppose there are 3 regions:
+
+  - `\(p_1 = 70/100\)`, `\(p_2 = 25/100\)`, `\(p_3 = 5/100\)`
+  
+  - `\(\alpha_1 = 9/10\)`, `\(\alpha_2 = 5/10\)`, and `\(\alpha_3 = 9/10\)`
+
+- If we search region 1 and do not find the plane (i.e `\(X = 0\)`), then our updated distribution is:
+
+  - `\(P(\theta = 1 | X = 0) = 7/37\)`, 
+  
+  - `\(P(\theta = 2 | X = 0) = 25/37\)`
+  
+  - `\(P(\theta = 3 | X = 0) = 5 / 37\)`
+
+
+---
+
+## Some Comments on the Likelihood and Estimators
+
+- The authors suggest the *mode* of the posterior as a simple estimator for `\(\theta\)`
+
+- They also derive the MLE for `\(\theta\)` 
+
+  - If `\(X = 1\)`, then the MLE is simply `\(i\)`
+  
+  - If `\(X = 0\)`, then there are `\(n-1\)` MLEs:
+  
+    - For `\(j \neq i\)`, then `\(\delta_j(X) = i1_1(X) + j1_0(X)\)` are all MLE options for `\(\theta\)`
+    
+- Because we do not have MLEs that distinguish between parameter values, we confirm that we do not have unique likelihood functions and are thus dealing with nonidentifiability
+
+- This shows how using Bayes has increased our knowledge of the situation (despite nonidentifiability): 
+
+  - We can create a posterior distribution that tells us new information about `\(\theta\)`, which we wouldn't have been able to do using likelihoods. 
+
+
+---
+
+## Conclusions / Summary
+
+- Even if our model is nonidentifiable, there may still be useful information about our parameters of interest, which we can extract using Bayes
+
+- Because nonidentifiability leads to undesirable and nonunique MLEs, an expert's opinion is needed and preferred to uniform / objective priors. 
+
+
+![JOY](joy.jpeg)
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"slideNumberFormat": "%current%",
+"highlightStyle": "github",
+"highlightLines": true,
+"ratio": "16:9",
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
