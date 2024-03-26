@@ -2,6 +2,8 @@
 # Script to pull pitcher daily stats --------------------------------------
 
 # https://stackoverflow.com/questions/77664560/scrape-data-from-site-using-variables-and-functions-and-bind-tables-to-one-dataf
+require(baseballr)
+require(tidyverse)
 
 
 #### These are the 2 functions that seem most useful

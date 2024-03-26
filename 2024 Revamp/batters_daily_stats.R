@@ -4,6 +4,8 @@
 # map_dfr()
 # x <- c(18882, 19470) 
 # test_list <- x %>% map(\(x) baseballr::fg_batter_game_logs(x,year = 2023))
+require(baseballr)
+require(tidyverse)
 
 
 #### These are the 2 functions that seem most useful
