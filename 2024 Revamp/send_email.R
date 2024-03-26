@@ -19,7 +19,7 @@ require(tidyverse)
 
 batter_tbl_html <- 
   batter_output %>%
-  select(-playerid. -Date) %>%
+  select(-playerid, -Date) %>%
   gt() %>%
   as_raw_html()
 

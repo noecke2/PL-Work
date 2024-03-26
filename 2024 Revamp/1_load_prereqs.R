@@ -1,12 +1,12 @@
 
 # Script to pull player lookup table and filter to this year --------------
 
-require(baseballr)
-require(blastula)
-require(glue)
-require(gt)
-require(keyring)
-require(tidyverse)
+library(baseballr)
+library(blastula)
+library(glue)
+library(gt)
+#library(keyring)
+library(tidyverse)
 
 # https://stackoverflow.com/questions/77664560/scrape-data-from-site-using-variables-and-functions-and-bind-tables-to-one-dataf
 
