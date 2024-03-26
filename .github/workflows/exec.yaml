@@ -24,8 +24,17 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@v3
 
-      - name: Import data
-        run: Rscript -e 'source("2024 Revamp/exec.R")'
+      - name: Load Pre-reqs
+        run: Rscript -e 'source("2024 Revamp/1_load_prereqs.R")'
+
+      - name: Batter Daily Stats
+        run: Rscript -e 'source("2024 Revamp/batters_daily_stats.R")'
+
+      - name: Pitcher Daily Stats
+        run: Rscript -e 'source("2024 Revamp/pitcher_daily_stats.R")'
+        
+      - name: Email Send
+        run: Rscript -e 'source("2024 Revamp/send_email.R")'
 
       - name: Commit results
         run: |
