@@ -174,7 +174,7 @@ pitcher_output <- pitcher_stats_prep(fg_keys, target_date, target_date)
 
 batter_tbl_html <- 
   batter_output %>%
-  select(-playerid. -Date) %>%
+  select(-playerid, -Date) %>%
   gt() %>%
   as_raw_html()
 
