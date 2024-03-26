@@ -17,8 +17,9 @@ jobs:
             any::googlesheets4
             any::baseballr
             any::gt
-            any::blastula
             any::glue
+            any::keyring
+            any::blastula
 
       - name: Check out repository
         uses: actions/checkout@v3
