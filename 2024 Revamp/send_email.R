@@ -2,7 +2,7 @@
 require(blastula)
 require(glue)
 require(gt)
-require(keyring)
+#require(keyring)
 require(tidyverse)
 
 # Store SMTP credentials in the
