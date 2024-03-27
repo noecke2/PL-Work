@@ -18,6 +18,7 @@ jobs:
             any::baseballr
             any::gt
             any::glue
+            any::keyring
             any::blastula
 
       - name: Check out repository
