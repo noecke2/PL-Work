@@ -20,6 +20,7 @@ jobs:
             any::glue
             any::keyring
             any::blastula
+            any::gmailr
 
       - name: Check out repository
         uses: actions/checkout@v3
