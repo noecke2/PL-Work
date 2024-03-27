@@ -82,8 +82,12 @@
 # gmailr testing ----------------------------------------------------------
 
 library(gmailr)
-gm_auth_configure(path = "2024 Revamp/gmail_credentials.json")
+#gm_auth_configure(path = "2024 Revamp/gmail_credentials.json")
 
+options(gargle_verbosity = "debug")
+
+gm_auth_configure(path = "2024 Revamp/gmail_credentials.json")
+gm_auth(email = "alnoecker4@gmail.com")
 
 mail <- gm_mime() %>%
   gm_to("alnoecker4@gmail.com") %>%
