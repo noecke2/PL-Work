@@ -60,15 +60,14 @@ email <-
 
 # if (interactive()) email
 
-
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")
 smtp_password <- Sys.getenv("SMTP_PASSWORD")
 
 creds <- creds_envvar(
   user = smtp_username,
-  pass_envvar = smtp_password,
-  provider = gmail
+  pass_envvar = "SMTP_PASSWORD",
+  provider = "gmail"
     #host = smtp_server
 )
 
