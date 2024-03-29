@@ -27,6 +27,11 @@ jobs:
 
       - name: Run exec.R
         run: Rscript -e 'source("2024 Revamp/exec.R")'
+        env:
+          SMTP_SERVER: ${{ secrets.SMTP_SERVER }}
+          SMTP_USERNAME: ${{ secrets.SMTP_USERNAME }}
+          SMTP_PASSWORD: ${{ secrets.SMTP_PASSWORD }}
+        
 
       - name: Commit results
         run: |
