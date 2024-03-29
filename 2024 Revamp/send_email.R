@@ -57,7 +57,6 @@ email <-
         pitcher_tbl_html
         )
   )
-
 # if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
