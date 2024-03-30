@@ -14,6 +14,13 @@ batter_tbl_html <-
 pitcher_tbl_html <-
   pitcher_output %>%
   select(-playerid, -Date) %>%
+  mutate(EV = round(EV, 1),
+         ERA =sprintf("%.2f",ERA),
+         WHIP = sprintf("%.2f", WHIP),
+         `K-BB%` = sprintf("%.0f%%", `K-BB%` * 100),
+         `SwStr%` = sprintf("%.0f%%", `SwStr%` * 100),
+         `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
+         `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
   gt() %>%
   as_raw_html()
 

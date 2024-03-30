@@ -74,12 +74,12 @@ season_batter_logs <- lapply(termi_batter_keys, function(player_id) {
 })
 
 # Combine game logs into a single data frame
-all_logs <- do.call(rbind, c(season_batter_logs, fill = TRUE))
+all_logs_batters <- do.call(rbind, c(season_batter_logs, fill = TRUE))
 
 # Filter for yesterday's date
 yesterday_date <- Sys.Date() - 1
 
-batter_output <- all_logs %>%
+batter_output <- all_logs_batters %>%
   as_tibble() %>%
   filter(Date == yesterday_date) %>%
   select(playerid,

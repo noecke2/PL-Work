@@ -40,21 +40,35 @@
 # colnames(test_list[[2]])[!(colnames(test_list[[2]])) %in% colnames(test_list[[1]])]
 
 season_pitcher_logs <- lapply(termi_pitcher_keys, function(player_id) {
-  fg_pitcher_game_logs(season_pitcher_logs, year = 2024)  # Adjust season as needed
+  # Retrieve pitcher game logs for the current player ID and season
+  player_logs <- fg_pitcher_game_logs(player_id, year = 2024)  # Adjust season as needed
+  
+  # Check if game logs were retrieved successfully
+  if (!is.null(player_logs)) {
+    return(player_logs)  # Return the game logs
+  } else {
+    # Handle case where game logs are not available
+    warning(paste("No game logs available for player ID", player_id))
+    return(NULL)  # Return NULL to indicate no game logs
+  }
 })
 
 # Combine game logs into a single data frame
-all_logs <- do.call(rbind, c(season_pitcher_logs, fill = TRUE))
+# all_logs_pitchers <- do.call(rbind, c(season_pitcher_logs, fill = TRUE))
+all_logs_pitchers <- bind_rows(season_pitcher_logs)
+
 
 # Filter for yesterday's date
 yesterday_date <- Sys.Date() - 1
-pitcher_output <- all_logs %>%
+pitcher_output <- all_logs_pitchers %>%
   as_tibble() %>%
   filter(Date == yesterday_date) %>%
   select(playerid,
          PlayerName,
          Team,
          Date,
+         W,
+         SV,
          IP,
          H,
          R,
@@ -70,16 +84,15 @@ pitcher_output <- all_logs %>%
          `Barrel%`,
          `HardHit%`,
   ) %>%
-  mutate(EV = round(EV, 1),
-         ERA = round(ERA,2),
-         WHIP = round(WHIP,2),
-         `K-BB%` = round(`K-BB%`*100,1),
-         `SwStr%` = round(`SwStr%`*100,1),
-         `Barrel%`= round(`Barrel%`*100,1),
-         `HardHit%` = round(`HardHit%`*100,1)) %>%
-  arrange(Team, -IP)
+  arrange(desc(as.numeric(`K-BB%`)), -IP)
 
-
+# mutate(EV = round(EV, 1),
+#        ERA =sprintf("%.2f",ERA),
+#        WHIP = sprintf("%.2f", WHIP),
+#        `K-BB%` = sprintf("%.1f%%", `K-BB%` * 100),
+#        `SwStr%` = round(`SwStr%`*100,1),
+#        `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
+#        `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
 
 
 

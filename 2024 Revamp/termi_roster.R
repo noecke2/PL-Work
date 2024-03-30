@@ -2,7 +2,7 @@
 # Create Termi Roster -----------------------------------------------------
 
 
-termi_hitters <- player_lu %>%
+termi_batters <- player_lu %>%
   filter((name_first == "Maikel" & name_last == "García") |
            (name_first == "Bo" & name_last == "Naylor") |
            (name_first == "Freddie" & name_last == "Freeman") |
@@ -22,7 +22,7 @@ termi_hitters <- player_lu %>%
            (name_first == "Parker" & name_last == "Meadows") |
            (name_first == "Michael" & name_last == "Busch") 
          )
-termi_hitter_keys <- termi_hitters %>% pull(key_fangraphs)
+termi_batter_keys <- termi_batters %>% pull(key_fangraphs)
 
 # fg_batter_leaders(startseason = 2024, endseason = 2024, startdate = "2024-03-20", enddate = "2024-03-28") %>% filter(playerid ==29490)
 

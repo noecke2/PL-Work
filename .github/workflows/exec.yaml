@@ -2,7 +2,7 @@ name: Email Workflow
 
 on:
   schedule:
-    - cron: '0 6 * * *'  # Schedule to run at 6 am every morning
+    - cron: '0 17 * * *'  # Schedule to run at 6 am every morning
 
 jobs:
   load-data-send-email:
