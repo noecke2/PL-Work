@@ -19,8 +19,8 @@ source("2024 Revamp/pitcher_daily_stats.R")
 source("2024 Revamp/send_email.R")
 
 batter_output %>%
-  write_rds("2024 Revamp/batter_output.rds")
+  write_rds("batter_output.rds")
 
 pitcher_output %>%
-  write_rds("2024 Revamp/pitcher_output.rds")
+  write_rds("pitcher_output.rds")
 
