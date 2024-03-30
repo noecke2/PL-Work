@@ -30,20 +30,19 @@ email <-
   compose_email(
     body =
       blocks(
-        block_title(md("This is a **PL Testing** Email")),
+        block_title(md(paste0("PL Daily Report: ", sending_date))),
         block_text(md(glue(
 
           "
   ## Hello!
 
-  This is the first day testing this on a schedule. Ideally, it will run around 6am. 
+  This is the first day testing this on a schedule. Ideally, it will run around 6am. We now have probable pitchers for the next day as well.
   
-  This data is from {sending_date} (date is dynamically inserted). We can also test using **bold** formatting.
-
   Thanks, Andrew
 
   "
         ))),
+        getTermiProbables(),
         batter_tbl_html,
         block_text(md(glue(
 
@@ -52,7 +51,7 @@ email <-
         pitcher_tbl_html
         )
   )
-# if (interactive()) email
+ if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")

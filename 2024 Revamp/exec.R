@@ -15,6 +15,9 @@ source("2024 Revamp/batters_daily_stats.R")
 # Load pitcher daily statistics from previous day
 source("2024 Revamp/pitcher_daily_stats.R")
 
+# Load function to get probable pitchers
+source("2024 Revamp/getTermiProbables.R")
+
 # Format table + send email
 source("2024 Revamp/send_email.R")
 

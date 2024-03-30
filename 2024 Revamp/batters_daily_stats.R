@@ -110,6 +110,6 @@ batter_output <- all_logs_batters %>%
          LA = round(LA,1),
          `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
          `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
-  arrange(Team,BatOrder)
+  arrange(-HR, -RBI)
 
 
