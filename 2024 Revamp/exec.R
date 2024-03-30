@@ -6,6 +6,9 @@
 # Load packages + player lookup table
 source("2024 Revamp/1_load_prereqs.R")
 
+# Load Termi Rosters
+source("2024 Revamp/termi_roster.R")
+
 # Load batter daily statistics from previous day
 source("2024 Revamp/batters_daily_stats.R")
 

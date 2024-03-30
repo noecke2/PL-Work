@@ -5,18 +5,6 @@
 # require(keyring)
 # require(tidyverse)
 
-# Store SMTP credentials in the
-# system's key-value store with
-# `provider = "gmail"`
-# create_smtp_creds_key(
-#   id = "gmail_creds2",
-#   user = "alnoecker4@gmail.com",
-#   provider = "gmail"
-# )
-#phxf zpwu dwpv yfqb
-
-#load("2024 Revamp/email_testing_240323.RData")
-
 batter_tbl_html <-
   batter_output %>%
   select(-playerid, -Date) %>%
@@ -41,7 +29,9 @@ email <-
           "
   ## Hello!
 
-  This is a testing email featuring hitters data from {sending_date} (date is dynamically inserted). We can also test using **bold** formatting.
+  This is the first day testing this on a schedule. Ideally, it will run around 6am. 
+  
+  This data is from {sending_date} (date is dynamically inserted). We can also test using **bold** formatting.
 
   Thanks, Andrew
 
@@ -51,9 +41,7 @@ email <-
         block_text(md(glue(
 
           "
-          This is some more text followed by the pitcher table:
-
-          Testing testing"))),
+          This is some more text followed by the pitcher table:\n"))),
         pitcher_tbl_html
         )
   )
@@ -72,9 +60,9 @@ creds <- creds_envvar(
 
 email %>%
   smtp_send(
-    to = c('alnoecker4@gmail.com'),
+    to = c('alnoecker4@gmail.com', 'duane.noecker@gmail.com'),
     from = 'alnoecker4@gmail.com',
-    subject = "Test email with hitter and pitcher data",
+    subject = paste0("Termi Daily Report: ", sending_date),
     credentials = creds
       #creds_key(id = "gmail_creds2")#creds_file(file = "gmail_creds")
   )
