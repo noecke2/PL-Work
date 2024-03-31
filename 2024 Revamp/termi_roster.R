@@ -45,7 +45,8 @@ termi_pitchers <- player_lu %>%
            (name_first == "Kyle" & name_last == "Harrison") |
             (name_first == "Abner" & name_last == "Uribe") |
             (name_first == "Clarke" & name_last == "Schmidt") |
-            (name_first == "James" & name_last == "McArthur")
+            (name_first == "James" & name_last == "McArthur") |
+           (name_first == "Jason" & name_last == "Foley")
            )
 
 termi_pitcher_keys <- termi_pitchers %>% pull(key_fangraphs)

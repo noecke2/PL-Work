@@ -14,6 +14,9 @@ require(tidyverse)
 player_lu <- baseballr::chadwick_player_lu() %>% 
   filter(pro_played_last %in% c(2022, 2023, 2024))
 
+
+# player_lu %>% filter(mlb_played_last == 2024, is.na(key_fangraphs)) %>% select(name_last, name_first)
+
 fg_keys <- player_lu %>%
   filter(!is.na(key_fangraphs),
          mlb_played_last %in% c(2024)) %>%
