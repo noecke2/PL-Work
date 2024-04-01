@@ -20,7 +20,8 @@ termi_batters <- player_lu %>%
            (name_first == "José" & name_last == "Siri") |
            (name_first == "Ian" & name_last == "Happ") |
            (name_first == "Parker" & name_last == "Meadows") |
-           (name_first == "Michael" & name_last == "Busch") 
+           (name_first == "Michael" & name_last == "Busch") |
+           (name_first == "Luis" & name_last == "Campusano") #|
          )
 termi_batter_keys <- termi_batters %>% pull(key_fangraphs)
 

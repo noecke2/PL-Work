@@ -110,6 +110,21 @@ batter_output <- all_logs_batters %>%
          LA = round(LA,1),
          `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
          `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
-  arrange(-HR, -RBI)
+  arrange(-HR, -RBI, -R, -H, -BB, -SB)
 
 
+batter_tbl_html <-
+  batter_output %>%
+  select(-playerid, -Date) %>%
+  gt() %>%
+  grand_summary_rows(
+    columns = c(AB, R, H, RBI, BB, HR, SB, SO),
+    fns = list(label = "TOTALS", id = "totals", fn = "sum"),
+    fmt = ~ fmt_integer(.),
+    side = "top"
+  ) %>%
+  tab_style(
+    locations = cells_grand_summary(),
+    style = cell_fill(color = "lightblue" %>% adjust_luminance(steps = +1))
+  ) %>%
+  as_raw_html()

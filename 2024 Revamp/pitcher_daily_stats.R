@@ -95,4 +95,39 @@ pitcher_output <- all_logs_pitchers %>%
 #        `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
 
 
+pitcher_tbl_html <-
+  pitcher_output %>%
+  select(-playerid, -Date) %>%
+  mutate(EV = round(EV, 1),
+         ERA =sprintf("%.2f",ERA),
+         WHIP = sprintf("%.2f", WHIP),
+         `K-BB%` = sprintf("%.0f%%", `K-BB%` * 100),
+         `SwStr%` = sprintf("%.0f%%", `SwStr%` * 100),
+         `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
+         `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
+  gt() %>%
+  grand_summary_rows(
+    columns = c(W, SV, IP, H, R, ER, BB, SO, HR),
+    fns = list(label = "TOTALS", id = "TOTALS", fn = ~sum(.)),
+    fmt = ~ fmt_integer(.),
+    side = "top"
+  ) %>%
+  grand_summary_rows(
+    columns = c(WHIP),
+    fns = list(label = "TOTALS", id = "TOTALS", fn = ~sum((H+BB)) / sum(IP)),
+    fmt = ~ fmt_number(., decimals = 2),
+    side = "top"
+  )%>%
+  grand_summary_rows(
+    columns = c(ERA),
+    fns = list(label = "TOTALS", id = "TOTALS", fn = ~(9 * (sum(ER) / sum(IP)))),
+    fmt = ~ fmt_number(., decimals = 2),
+    side = "top"
+  ) %>%
+  tab_style(
+    locations = cells_grand_summary(),
+    style = cell_fill(color = "lightblue" %>% adjust_luminance(steps = +1))
+  ) %>%
+  as_raw_html()
+
 

@@ -5,24 +5,7 @@
 # require(keyring)
 # require(tidyverse)
 
-batter_tbl_html <-
-  batter_output %>%
-  select(-playerid, -Date) %>%
-  gt() %>%
-  as_raw_html()
 
-pitcher_tbl_html <-
-  pitcher_output %>%
-  select(-playerid, -Date) %>%
-  mutate(EV = round(EV, 1),
-         ERA =sprintf("%.2f",ERA),
-         WHIP = sprintf("%.2f", WHIP),
-         `K-BB%` = sprintf("%.0f%%", `K-BB%` * 100),
-         `SwStr%` = sprintf("%.0f%%", `SwStr%` * 100),
-         `Barrel%` = sprintf("%.0f%%", `Barrel%` * 100),
-         `HardHit%` = sprintf("%.0f%%", `HardHit%` * 100)) %>%
-  gt() %>%
-  as_raw_html()
 
 sending_date <- format(as.Date(batter_output %>% distinct(Date) %>% pull(Date)),'%B %d, %Y')
 
@@ -36,7 +19,7 @@ email <-
           "
   ## Hello!
 
-  This is the first day testing this on a schedule. Ideally, it will run around 6am. We now have probable pitchers for the next day as well.
+  New feature today: Totals bar added to the top of the table. Next feature: Adding a starter/bench indicator so totals are more reflective of what our starters did. Might also color code / format the table if someone is a starter. 
   
   Thanks, Andrew
 
