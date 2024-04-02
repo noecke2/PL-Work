@@ -121,7 +121,7 @@ batter_tbl_html <-
     columns = c(AB, R, H, RBI, BB, HR, SB, SO),
     fns = list(label = "TOTALS", id = "totals", fn = "sum"),
     fmt = ~ fmt_integer(.),
-    side = "top"
+    side = c("top")
   ) %>%
   tab_style(
     locations = cells_grand_summary(),

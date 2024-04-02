@@ -110,19 +110,19 @@ pitcher_tbl_html <-
     columns = c(W, SV, IP, H, R, ER, BB, SO, HR),
     fns = list(label = "TOTALS", id = "TOTALS", fn = ~sum(.)),
     fmt = ~ fmt_integer(.),
-    side = "top"
+    side = c("top")
   ) %>%
   grand_summary_rows(
     columns = c(WHIP),
     fns = list(label = "TOTALS", id = "TOTALS", fn = ~sum((H+BB)) / sum(IP)),
     fmt = ~ fmt_number(., decimals = 2),
-    side = "top"
+    side = c("top")
   )%>%
   grand_summary_rows(
     columns = c(ERA),
     fns = list(label = "TOTALS", id = "TOTALS", fn = ~(9 * (sum(ER) / sum(IP)))),
     fmt = ~ fmt_number(., decimals = 2),
-    side = "top"
+    side = c("top")
   ) %>%
   tab_style(
     locations = cells_grand_summary(),
