@@ -8,3 +8,7 @@ The functions used in the report are in this folder, along with the `Period-Repo
 ##### `Period-Reports`
 
 The main file of interest in this folder is the `report1.Rmd`, which is the main report that is knitted and shared between my dad and I. It allows us to look at advanced statistics for our players, all MLB players, and free agents available in our league (done by scraping each fantasy team's rosters using the googlesheets4 package). 
+
+### `2024 Revamp`
+
+New code for 2024 season - adding a daily email that deploys at 5:30am. Includes previous day's statistics for our players and the next days probable pitchers. More features to be added in the future.
