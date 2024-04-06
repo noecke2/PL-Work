@@ -49,7 +49,7 @@ creds <- creds_envvar(
 
 email %>%
   smtp_send(
-    to = c('alnoecker4@gmail.com'),
+    to = c('alnoecker4@gmail.com', 'duane.noecker@gmail.com'),
     from = 'alnoecker4@gmail.com',
     subject = paste0("Termi Daily Report: ", sending_date),
     credentials = creds
