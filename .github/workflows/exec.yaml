@@ -1,8 +1,10 @@
 name: Email Workflow
 
 on:
-  schedule:
-    - cron: '0 11 * * *'  # Schedule to run at 6:00 am every morning
+  push:
+    branches: main
+  # schedule:
+  #   - cron: '0 11 * * *'  # Schedule to run at 6:00 am every morning
 
 jobs:
   load-data-send-email:

@@ -3,6 +3,11 @@
 
 ##### Run all relevant scripts
 
+# Load helper functions
+source("2024 Revamp/get_termi_probables.R")
+source("2024 Revamp/fix_missing_ids.R")
+# source("2024 Revamp/write_players_to_gs.R")
+
 # Load packages + player lookup table
 source("2024 Revamp/1_load_prereqs.R")
 
@@ -16,14 +21,13 @@ source("2024 Revamp/batters_daily_stats.R")
 source("2024 Revamp/pitcher_daily_stats.R")
 
 # Load function to get probable pitchers
-source("2024 Revamp/getTermiProbables.R")
 
 # Format table + send email
 source("2024 Revamp/send_email.R")
 
-batter_output %>%
-  write_rds("batter_output.rds")
-
-pitcher_output %>%
-  write_rds("pitcher_output.rds")
+# batter_output %>%
+#   write_rds("batter_output.rds")
+# 
+# pitcher_output %>%
+#   write_rds("pitcher_output.rds")
 

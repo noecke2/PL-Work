@@ -5,14 +5,25 @@ require(baseballr)
 require(blastula)
 require(glue)
 require(gt)
+require(googlesheets4)
 #require(keyring)
 require(tidyverse)
 
-# https://stackoverflow.com/questions/77664560/scrape-data-from-site-using-variables-and-functions-and-bind-tables-to-one-dataf
+player_lu <- read_rds("2024 Revamp/player_lookup.rds")
+last_update_date  <- player_lu %>% distinct(last_update_date) %>% pull(last_update_date)
 
-
-player_lu <- baseballr::chadwick_player_lu() %>% 
-  filter(pro_played_last %in% c(2022, 2023, 2024))
+# If player lookup table hasn't been updated in 7 days, load new one
+# Otherwise, just use the one from the last 7 days
+if (last_update_date <= Sys.Date() - 7) {
+  player_lu_raw <- baseballr::chadwick_player_lu() %>% 
+    filter(pro_played_last %in% c(2022, 2023, 2024))
+  
+  player_lu <- fix_missing_ids(player_lu_raw) %>%
+    mutate(last_update_date = Sys.Date())
+  
+  write_rds(player_lu, "2024 Revamp/player_lookup.rds")
+  # write_players_to_gs()
+}
 
 
 # player_lu %>% filter(mlb_played_last == 2024, is.na(key_fangraphs)) %>% select(name_last, name_first)

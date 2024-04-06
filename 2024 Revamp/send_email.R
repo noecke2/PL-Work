@@ -19,13 +19,13 @@ email <-
           "
   ## Hello!
 
-  New feature today: Totals bar added to the top of the table. Next feature: Adding a starter/bench indicator so totals are more reflective of what our starters did. Might also color code / format the table if someone is a starter. 
+  **New feature today: Totals broken out by starters/bench.** Calculations are also more accurate now - before it was calculating ERA and WHIP with IP as e.g '1.2' instead of 1.67.  
   
   Thanks, Andrew
 
   "
         ))),
-        getTermiProbables(),
+        get_termi_probables(),
         batter_tbl_html,
         block_text(md(glue(
 
@@ -34,7 +34,7 @@ email <-
         pitcher_tbl_html
         )
   )
- if (interactive()) email
+  # if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")
@@ -49,7 +49,7 @@ creds <- creds_envvar(
 
 email %>%
   smtp_send(
-    to = c('alnoecker4@gmail.com', 'duane.noecker@gmail.com'),
+    to = c('alnoecker4@gmail.com'),
     from = 'alnoecker4@gmail.com',
     subject = paste0("Termi Daily Report: ", sending_date),
     credentials = creds
