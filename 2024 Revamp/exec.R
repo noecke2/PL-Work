@@ -4,9 +4,12 @@
 ##### Run all relevant scripts
 
 # Load helper functions
-source("2024 Revamp/get_termi_probables.R")
-source("2024 Revamp/fix_missing_ids.R")
-# source("2024 Revamp/write_players_to_gs.R")
+source("2024 Revamp/helper functions/get_termi_probables.R")
+source("2024 Revamp/helper functions/fix_missing_ids.R")
+source("2024 Revamp/helper functions/create_pitcher_html_tbl.R")
+source("2024 Revamp/helper functions/create_batter_html_tbl.R")
+
+# source("2024 Revamp/helper functions/write_players_to_gs.R")
 
 # Load packages + player lookup table
 source("2024 Revamp/1_load_prereqs.R")

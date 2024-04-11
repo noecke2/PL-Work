@@ -9,7 +9,7 @@ ss <- "1nTbaBZ6tply7bBv7GRo4sLkLathcZIX_ByUnk7cnkXw"
 # Data is public so don't need to authenticate
 gs4_deauth()
 
-# Read in missing FG keys
+# Read in FG keys
 pl_rosters <- googlesheets4::range_read(ss = ss,
                                         sheet = "Rosters",
                                         range = "M1:W50")

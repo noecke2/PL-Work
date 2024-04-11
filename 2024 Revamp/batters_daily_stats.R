@@ -61,42 +61,8 @@ batter_output <- all_logs_batters %>%
   arrange(-is_starter,-HR, -RBI, -R, -H, -BB, -SB)
 
 
-if(nrow(batter_output) > 0){
-  
-  batter_tbl_html <-  batter_output %>%
-    select(-playerid, -Date) %>%
-    # filter(is_starter == 1) %>%
-    gt() %>%
-    tab_row_group(
-      label =  "Starters",
-      rows = is_starter == 1
-    ) %>%
-    tab_row_group(
-      label = "Bench",
-      rows = is_starter == 0
-    ) %>%
-    summary_rows(
-      groups = everything(),
-      columns = c(AB, R, H, RBI, BB, HR, SB, SO),
-      fns = list(TOTAL = ~sum(., na.rm = TRUE)),
-      fmt = ~ fmt_integer(.),
-      side = c("top")
-    ) %>%
-    tab_style(
-      locations = cells_summary(groups = "Starters"),
-      style = cell_fill(color = "lightblue" %>% adjust_luminance(steps = +1))
-    ) %>%
-    tab_style(
-      locations = cells_summary(groups = "Bench"),
-      style = cell_fill(color = "grey" %>% adjust_luminance(steps = +1))
-    ) %>%
-    row_group_order(groups = c("Starters", "Bench")) %>%
-    cols_hide(columns = c(is_starter)) %>%
-    as_raw_html()
-  
-} else {
-  batter_tbl_html <- html("We either had no pitchers yesterday or data is not accessible yet")
-}
+batter_tbl_html <- create_batter_html_tbl(batter_output)
+
 
 
 

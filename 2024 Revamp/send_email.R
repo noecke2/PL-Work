@@ -9,32 +9,29 @@
 
 sending_date <- format(as.Date(batter_output %>% distinct(Date) %>% pull(Date)),'%B %d, %Y')
 
-email <-
-  compose_email(
-    body =
-      blocks(
-        block_title(md(paste0("PL Daily Report: ", sending_date))),
-        block_text(md(glue(
-
-          "
-  ## Hello!
-
-  **New feature today: Totals broken out by starters/bench.** Calculations are also more accurate now - before it was calculating ERA and WHIP with IP as e.g '1.2' instead of 1.67.  
-  
-  Thanks, Andrew
-
+email_body <- glue::glue(
   "
-        ))),
-        get_termi_probables(),
-        batter_tbl_html,
-        block_text(md(glue(
+  ## Hello!
+  
+  **New feature today:** Cleaned up table titles and implemented better error handling for hitter + pitcher tables. Hoping to add 7 day weekly updates soon (in the next couple of days). 
+  
+  Thanks,  
+  Andrew
+  "
+)
 
-          "
-          This is some more text followed by the pitcher table:\n"))),
-        pitcher_tbl_html
-        )
+# Compose the email
+email <- compose_email(
+  body = blocks(
+    block_title(md(paste0("PL Daily Report: ", sending_date))),
+    block_text(md(email_body)),
+    get_termi_probables(),
+    batter_tbl_html,
+    block_text("\n"),  # Additional spacing
+    pitcher_tbl_html
   )
-  # if (interactive()) email
+)
+   # if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")
