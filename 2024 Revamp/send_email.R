@@ -31,7 +31,7 @@ email <- compose_email(
     pitcher_tbl_html
   )
 )
-   # if (interactive()) email
+    # if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")
