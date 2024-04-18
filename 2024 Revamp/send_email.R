@@ -13,7 +13,7 @@ email_body <- glue::glue(
   "
   ## Hello!
   
-  **New feature today:** Cleaned up table titles and implemented better error handling for hitter + pitcher tables. Hoping to add 7 day weekly updates soon (in the next couple of days). 
+  **New feature today:** Daily free agent hitter table now included (pitcher version coming soon), as well as probable pitchers for our opponent.   
   
   Thanks,  
   Andrew
@@ -25,13 +25,16 @@ email <- compose_email(
   body = blocks(
     block_title(md(paste0("PL Daily Report: ", sending_date))),
     block_text(md(email_body)),
-    get_termi_probables(),
+    get_probables(team = "Terminoeckers"),
+    get_probables(team = "Vass Deferens"),
     batter_tbl_html,
     block_text("\n"),  # Additional spacing
-    pitcher_tbl_html
+    pitcher_tbl_html,
+    block_text("\n Here are the top free agent hitters\n"),
+    get_top_free_agents()
   )
 )
-    # if (interactive()) email
+     if (interactive()) email
 
 smtp_server <- Sys.getenv("SMTP_SERVER")
 smtp_username <- Sys.getenv("SMTP_USERNAME")

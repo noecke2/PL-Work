@@ -25,3 +25,11 @@ termi_starters <- pl_rosters$Terminoeckers[1:28] # first 28 players in the colum
 
 # fg_batter_leaders(startseason = 2024, endseason = 2024, startdate = Sys.Date() - 15, enddate = Sys.Date() - 1) %>% filter(playerid %in% termi_full_keys) %>% view()
 
+
+long_pl_rosters <- pl_rosters %>% 
+  pivot_longer(cols = !POS, 
+               names_to = "Team_Name",
+               values_to = "playerid") %>%
+  filter(!is.na(playerid)) %>%
+  arrange(Team_Name) %>%
+  inner_join(player_lu, by = c("playerid" = "key_fangraphs"))

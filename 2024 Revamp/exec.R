@@ -4,10 +4,11 @@
 ##### Run all relevant scripts
 
 # Load helper functions
-source("2024 Revamp/helper functions/get_termi_probables.R")
+source("2024 Revamp/helper functions/get_probables.R")
 source("2024 Revamp/helper functions/fix_missing_ids.R")
 source("2024 Revamp/helper functions/create_pitcher_html_tbl.R")
 source("2024 Revamp/helper functions/create_batter_html_tbl.R")
+source("2024 Revamp/helper functions/free_agents_season.R")
 
 # source("2024 Revamp/helper functions/write_players_to_gs.R")
 

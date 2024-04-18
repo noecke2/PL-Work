@@ -4,25 +4,34 @@
 
 # Step 1: Pull game packs for the next day --------------------------------
 
-get_termi_probables <- function() {
+get_probables <- function(team = "Terminoeckers") {
   next_day_pks <- mlb_game_pks(Sys.Date()) %>% pull(game_pk)
   next_day_probables <- bind_rows(lapply(next_day_pks, mlb_probables))
   
-  termi_probables <- next_day_probables %>% 
-    filter(id %in% termi_full$key_mlbam) %>%
+  team_mlb_ids <- long_pl_rosters %>%
+    filter(Team_Name == team) %>%
+    pull(key_mlbam)
+  
+  probables <- next_day_probables %>% 
+    filter(id %in% team_mlb_ids) %>%
     left_join(next_day_probables, by = c("game_pk"), suffix = c("", "_opp")) %>%
     filter(id != id_opp | is.na(id_opp)) %>%
     mutate(fullName_opp = ifelse(is.na(fullName_opp), "TBD", fullName_opp)) %>%
     select(fullName, team, fullName_opp, team_opp)
   
-  if(nrow(termi_probables) > 0){
-    table_gt <- termi_probables %>%
+
+  if(nrow(probables) > 0){
+    table_gt <- probables %>%
       gt() %>%
       tab_header(
-        title = paste0("Probable Pitchers for ", format(Sys.Date(), "%B %d, %Y")),
+        title =  
+        paste0(
+          "Probable Pitchers for ",team, ": ", 
+          format(Sys.Date(), "%B %d, %Y")
+          )
       ) %>%
       cols_label(
-        fullName = "Termi Pitcher",
+        fullName = paste0(team," Pitcher"),
         team = "Team",
         fullName_opp = "Opposing Pitcher",
         team_opp = "Opposing Team"
@@ -40,6 +49,6 @@ get_termi_probables <- function() {
     return(as_raw_html(table_gt))
     
   } else {
-    return(html("There are no Terminoecker probable pitchers today"))
+    return(html(paste0("There are no probable pitchers today for ", team)))
   }
 }
