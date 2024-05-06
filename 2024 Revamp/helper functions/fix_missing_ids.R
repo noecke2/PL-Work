@@ -3,6 +3,7 @@
 # player_lu %>%
 #   filter(mlb_played_last %in% c(2023,2024), is.na(key_fangraphs)) %>%
 #   select(key_person, name_first, name_last) %>%
+#   arrange(name_first)
 #   view()
 
 fix_missing_ids <- function(player_lu_raw) {

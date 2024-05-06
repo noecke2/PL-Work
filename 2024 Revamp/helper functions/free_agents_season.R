@@ -95,9 +95,66 @@ get_top_free_agents <- function(n = 30){
 
 
 # fg_pitcher_leaders(startseason = 2024, endseason = 2024) %>%
-#   filter(!playerid %in% long_pl_rosters$playerid) %>% 
-#   colnames()
-
-
-
+#   filter(!playerid %in% long_pl_rosters$playerid) %>%
+#   colnames() %>%
+#   as_tibble() %>%
+#   arrange(value) %>% view()
+# 
+# 
+# fg_pitcher_leaders(startseason = 2024, endseason = 2024) %>%
+#   filter(!playerid %in% long_pl_rosters$playerid,
+#          !is.na(maxEV),
+#          IP > (GS*3),
+#          GS > 0) %>%
+#   select(playerid,
+#          PlayerName,
+#          team_name,
+#          G,
+#          IP,
+#          W,
+#          SO,
+#          SV,
+#          ERA,
+#          WHIP,
+#          EV,
+#          Barrel_pct,
+#          HardHit_pct,
+#          xFIP,
+#          xERA,
+#          SIERA,
+#          `K-BB_pct`,
+#          `C+SwStr_pct`) %>%
+#   arrange(-`K-BB_pct`) %>%
+#   print(n = 50)
+#   
+#   
+#   select(playerid,
+#          PlayerName,
+#          # is_starter,
+#          team_name,
+#          G,
+#          AB,
+#          R,
+#          H,
+#          RBI,
+#          BB,
+#          HR,
+#          SB,
+#          SO,
+#          K_pct,
+#          BB_pct,
+#          wOBA,
+#          xwOBA,
+#          wRC_plus,
+#          BABIP,
+#          # Events,
+#          maxEV,
+#          EV,
+#          LA,
+#          # Barrels,
+#          Barrel_pct,
+#          maxEV,
+#          # HardHit,
+#          HardHit_pct) %>%
+#   arrange(-xwOBA)
 
