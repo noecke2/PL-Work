@@ -26,7 +26,7 @@ email <- compose_email(
     block_title(md(paste0("PL Daily Report: ", sending_date))),
     block_text(md(email_body)),
     get_probables(team = "Terminoeckers"),
-    get_probables(team = "Mean Wieners"),
+    get_probables(team = "Washington Generals"),
     batter_tbl_html,
     block_text("\n"),  # Additional spacing
     pitcher_tbl_html,

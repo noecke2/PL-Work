@@ -1,9 +1,17 @@
 
-# 27 players who don't have a fangraphs key who have played this year
+# XX players who don't have a fangraphs key who have played this year
+# already_fixed_ids <- googlesheets4::range_read(ss = ss,
+#                                             sheet = "Player Lookup Fixes",
+#                                             range = "A1:D100") %>%
+#   filter(!is.na(key_fangraphs)) %>%
+#   mutate(key_person = as.character(key_person))
+# 
 # player_lu %>%
-#   filter(mlb_played_last %in% c(2023,2024), is.na(key_fangraphs)) %>%
+#   filter(mlb_played_last %in% c(2023,2024), 
+#          is.na(key_fangraphs),
+#          !key_person %in% already_fixed_ids$key_person) %>%
 #   select(key_person, name_first, name_last) %>%
-#   arrange(name_first)
+#   arrange(name_first) %>%
 #   view()
 
 fix_missing_ids <- function(player_lu_raw) {
@@ -19,7 +27,7 @@ fix_missing_ids <- function(player_lu_raw) {
   # Read in missing FG keys
   missing_fg_ids <- googlesheets4::range_read(ss = ss,
                                               sheet = "Player Lookup Fixes",
-                                              range = "A1:D100") %>%
+                                              range = "A1:D150") %>%
     filter(!is.na(key_fangraphs)) %>%
     mutate(key_person = as.character(key_person))
 
