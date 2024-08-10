@@ -33,8 +33,9 @@ fg_keys <- player_lu %>%
          mlb_played_last %in% c(2024)) %>%
   pull(key_fangraphs)
 
-#playerid_lookup(last_name = "Wyatt", first_name = "Langford")
+# playerid_lookup(last_name = "Ryan", first_name = "River")
 
-#player_lu %>% filter(name_first == "Jackson", name_last == "Merrill") %>% view()
+# player_lu %>% filter(name_first == "River", name_last == "Ryan") %>% view()
+
 
 # freeman
